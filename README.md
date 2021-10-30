@@ -17,7 +17,7 @@ The following **required** functionality is completed:
 The following **extensions** are implemented:
 
 * [X] Asking for permission to use the client's location
-* [X] When the client first creates a map, the map is centered on their current location if allowed and centered on Silicon Valley otherwise
+* [X] When the client first creates a map, the map is centered on their current location if allowed and centered on Silicon Valley/Palo Alto otherwise
 
 ## Video Walkthrough
 
