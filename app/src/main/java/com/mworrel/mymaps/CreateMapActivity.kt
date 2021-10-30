@@ -121,6 +121,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
          * device. The result of the permission request is handled by a callback,
          * onRequestPermissionsResult.
          */
+        // Credit: https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial
         if (ContextCompat.checkSelfPermission(this.applicationContext,
 
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -136,6 +137,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
                                             grantResults: IntArray) {
+        // Credit: https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         locationPermissionGranted = false
         when (requestCode) {
@@ -156,6 +158,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
          */
+        // Credit: https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial
         try {
             if (locationPermissionGranted) {
                 val locationResult = fusedLocationProviderClient.lastLocation
@@ -168,13 +171,11 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                                 LatLng(lastKnownLocation!!.latitude,
                                     lastKnownLocation!!.longitude), 15f))
                         }
-                    } else {
-                        Log.d(TAG, "Current location is null. Using defaults.")
-                        Log.e(TAG, "Exception: %s", task.exception)
-                        val siliconValley = LatLng(37.4, -122.1)
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(siliconValley, 10f))
                     }
                 }
+            } else {
+                val siliconValley = LatLng(37.4, -122.1)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(siliconValley, 10f))
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
